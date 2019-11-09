@@ -48,7 +48,7 @@ static void rmerge(int * C merged, C int * C lhs, C int * C rhs, C size_t ll, C 
         return;
     }
 
-    C bool left = ll == 0 ? false : (rl == 0 ? true : (*lhs < *rhs));
+    C bool left = rl == 0 || (ll != 0 && *lhs < *rhs);
 
     C int * C lhs_prime = left ? lhs + 1 : lhs;
     C int * C rhs_prime = left ? rhs : rhs + 1;
