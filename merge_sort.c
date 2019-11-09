@@ -49,15 +49,15 @@ static void rmerge(int * C merged, C int * C lhs, C int * C rhs, C size_t ll, C 
     }
 
     C bool left = rl == 0 || (ll != 0 && *lhs < *rhs);
+    C bool right = !left;
 
-    C int * C lhs_prime = left ? lhs + 1 : lhs;
-    C int * C rhs_prime = left ? rhs : rhs + 1;
-    C int ll_prime = left ? ll - 1 : ll;
-    C int rl_prime = left ? rl : rl - 1;
+    if (left) {
+        *merged = *lhs;
+    } else {
+        *merged = *rhs;
+    }
 
-    *merged = left ? *lhs : *rhs;
-
-    rmerge(merged + 1, lhs_prime, rhs_prime, ll_prime, rl_prime);
+    rmerge(merged + 1, lhs + left, rhs + right, ll - left, rl - right);
 }
 
 #undef C
